@@ -29,37 +29,37 @@ pipeline {
         }
     }
 
-    stage('docker build') {
-        steps {
-           sh 'docker login $HARBOR_HOST -u $HARBOR_USER_NAME -p $HARBOR_PASSWORD'
-           sh 'docker build -t $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION .'
-           sh 'docker push $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
-           sh 'docker rmi $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
-        }
-    }
+    // stage('docker build') {
+    //     steps {
+    //        sh 'docker login $HARBOR_HOST -u $HARBOR_USER_NAME -p $HARBOR_PASSWORD'
+    //        sh 'docker build -t $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION .'
+    //        sh 'docker push $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
+    //        sh 'docker rmi $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
+    //     }
+    // }
 
 
 
-    stage('deploy k8s') {
-        agent {
-            node {
-              label 'base'
-            }
-        }
-        steps {
-             container('base') {
-                  withCredentials([
-                      kubeconfigFile(
-                          credentialsId: 'ct-hr-dev-conf',
-                          variable: 'KUBECONFIG')
-                        ]) {
-                        sh 'ls'
-                        sh 'envsubst < k8s-devops.yaml | kubectl delete -f -'
-                        sh 'envsubst < k8s-devops.yaml | kubectl apply -f -'
-                    }
-                  }
-        }
-    }
+    // stage('deploy k8s') {
+    //     agent {
+    //         node {
+    //           label 'base'
+    //         }
+    //     }
+    //     steps {
+    //          container('base') {
+    //               withCredentials([
+    //                   kubeconfigFile(
+    //                       credentialsId: 'ct-hr-dev-conf',
+    //                       variable: 'KUBECONFIG')
+    //                     ]) {
+    //                     sh 'ls'
+    //                     sh 'envsubst < k8s-devops.yaml | kubectl delete -f -'
+    //                     sh 'envsubst < k8s-devops.yaml | kubectl apply -f -'
+    //                 }
+    //               }
+    //     }
+    // }
 
   }
 }
