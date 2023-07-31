@@ -1,13 +1,13 @@
 pipeline {
-  agent {
-    kubernetes {
-      inheritFrom 'nodejs'
-      containerTemplate {
-        name 'nodejs'
-        image 'harbor.evescn.com/public/build:node-18-pnpm-7'
-      }
-    }
-  }
+  // agent {
+  //   kubernetes {
+  //     inheritFrom 'nodejs'
+  //     containerTemplate {
+  //       name 'nodejs'
+  //       image 'harbor.evescn.com/public/build:node-18-pnpm-7'
+  //     }
+  //   }
+  // }
 
   environment {
       HARBOR_HOST = 'harbor.evescn.com'
