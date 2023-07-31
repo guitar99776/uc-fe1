@@ -1,5 +1,6 @@
 pipeline {
-  // agent {
+  agent any
+  // {
   //   kubernetes {
   //     inheritFrom 'nodejs'
   //     containerTemplate {
