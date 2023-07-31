@@ -25,20 +25,12 @@ pipeline {
         //         checkout scmGit(branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[credentialsId: '098a599e-fe1a-4d5b-9d59-e4117d7b24d4', url: 'http://222.212.85.162:30080/sunshine/purchasing.git']])
         //     }
         // }
-        stage('通过node16-pnpm7构建项目') {
-            // environment {
-            //     MAVEN_IMAGE = 'harbor.evescn.com/ncs/purchase/build:node-16-pnpm-7'
-            // }
-            steps {
-                echo "通过node-pnpm7构建项目"
-                script {
-                    docker.image(MAVEN_IMAGE).inside() {
-                        sh ' pwd && ls -alh'
-                        sh ' pnpm install --no-frozen-lockfile && pnpm run build'
-                        sh 'ls'
-                    }
-                }
-            }
+        stage('pnpm build') {
+          steps {
+            sh 'pnpm install'
+            sh 'pnpm run build'
+            sh 'ls'
+          }
         }
         // stage('通过Docker制作自定义镜像') {
         //     steps {
