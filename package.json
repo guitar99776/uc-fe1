@@ -1,0 +1,39 @@
+{
+    "private": true,
+    "author": "liushuhui <394507099@qq.com>",
+    "sideEffects": [
+        "*.less",
+        "*.css",
+        "dayjs/locale/*.*"
+    ],
+    "scripts": {
+        "build": "max build",
+        "dev": "max dev",
+        "format": "prettier --cache --write .",
+        "postinstall": "max setup",
+        "prepare": "husky install",
+        "setup": "max setup",
+        "start": "npm run dev"
+    },
+    "dependencies": {
+        "@ant-design/icons": "^5.1.4",
+        "@ant-design/pro-components": "^2.5.7",
+        "@twp0217/react-org-chart": "^1.1.2",
+        "@umijs/max": "^4.0.70",
+        "antd": "^5.6.1",
+        "cmt-utils": "^0.0.1",
+        "dayjs": "^1.11.9",
+        "lodash": "^4.17.21"
+    },
+    "devDependencies": {
+        "@types/lodash": "^4.14.195",
+        "@types/react": "^18.2.12",
+        "@types/react-dom": "^18.2.5",
+        "husky": "^8.0.3",
+        "lint-staged": "^13.2.2",
+        "prettier": "^2.8.8",
+        "prettier-plugin-organize-imports": "^3.2.2",
+        "prettier-plugin-packagejson": "^2.4.3",
+        "typescript": "^5.1.3"
+    }
+}
