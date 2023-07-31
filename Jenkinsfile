@@ -26,9 +26,9 @@ pipeline {
         //     }
         // }
         stage('通过node16-pnpm7构建项目') {
-            environment {
-                MAVEN_IMAGE = 'harbor.evescn.com/ncs/purchase/build:node-16-pnpm-7'
-            }
+            // environment {
+            //     MAVEN_IMAGE = 'harbor.evescn.com/ncs/purchase/build:node-16-pnpm-7'
+            // }
             steps {
                 echo "通过node-pnpm7构建项目"
                 script {
