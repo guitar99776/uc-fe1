@@ -32,7 +32,7 @@ pipeline {
         steps {
           echo "start building~~~~~~~~~~~~~"
           script {
-            docker.image(MAVEN_IMAGE).inside() {
+            docker.image().inside() {
               sh 'pnpm install'
               sh 'pnpm run build'
               sh 'ls -l dist'
