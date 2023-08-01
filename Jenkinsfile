@@ -32,7 +32,7 @@ pipeline {
         steps {
           sh 'pnpm install'
           sh 'pnpm run build'
-          sh `ls -l dist | awk '{print $5}'`
+          sh 'ls -l dist'
         }
     }
     stage('Packing') {
