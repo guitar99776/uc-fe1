@@ -30,31 +30,25 @@ pipeline {
           MAVEN_IMAGE = 'harbor.evescn.com/ncs/purchase/build:node-16-pnpm-7'
         }
         steps {
-          sh 'pnpm install'
-          sh 'pnpm run build'
-          sh 'ls -l dist'
+          echo "start building~~~~~~~~~~~~~"
+          script {
+            docker.image(MAVEN_IMAGE).inside() {
+              sh 'pnpm install'
+              sh 'pnpm run build'
+              sh 'ls -l dist'
+            }
+          }
         }
     }
-    stage('Packing') {
+    stage('docker build') {
       steps {
-          // unstash "DISTFILE"
-          script {
-            def img = docker.build()
-            img.push()
-          }
+          sh "ls -alh"
+          sh 'docker login $HARBOR_HOST -u $HARBOR_USER_NAME -p $HARBOR_PASSWORD'
+          sh 'docker build -t $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION .'
+          sh 'docker push $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
+          sh 'docker rmi $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
       }
     }
-
-    // stage('docker build') {
-    //     steps {
-    //        sh 'docker login $HARBOR_HOST -u $HARBOR_USER_NAME -p $HARBOR_PASSWORD'
-    //        sh 'docker build -t $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION .'
-    //        sh 'docker push $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
-    //        sh 'docker rmi $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
-    //     }
-    // }
-
-
 
     // stage('deploy k8s') {
     //     agent {
