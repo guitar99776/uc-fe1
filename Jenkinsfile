@@ -14,19 +14,35 @@ pipeline {
       HARBOR_HOST = 'harbor.evescn.com'
       HARBOR_USER_NAME = 'admin'
       HARBOR_PASSWORD = 'Ctg.2023'
-      HARBOR_PATH='ctg-hr'
+      HARBOR_PATH ='ctg-hr'
       APP_NAME = 'uc-fe'
       APP_VERSION = 'latest'
    }
 
   stages {
-
+    stage('check environment') {
+        steps {
+            sh 'docker --version'
+        }
+    }
     stage('pnpm build') {
+        environment {
+          MAVEN_IMAGE = 'harbor.evescn.com/ncs/purchase/build:node-16-pnpm-7'
+        }
         steps {
           sh 'pnpm install'
           sh 'pnpm run build'
-          sh 'ls'
+          sh `ls -l dist | awk '{print $5}'`
         }
+    }
+    stage('Packing') {
+      steps {
+          unstash "DISTFILE"
+          script {
+            def img = docker.build()
+            img.push()
+          }
+      }
     }
 
     // stage('docker build') {
