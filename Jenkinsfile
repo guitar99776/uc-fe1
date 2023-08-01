@@ -37,7 +37,7 @@ pipeline {
     }
     stage('Packing') {
       steps {
-          unstash "DISTFILE"
+          // unstash "DISTFILE"
           script {
             def img = docker.build()
             img.push()
