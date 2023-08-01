@@ -27,16 +27,16 @@ pipeline {
     }
     stage('pnpm build') {
         environment {
-          MAVEN_IMAGE = 'harbor.evescn.com/ncs/purchase/build:node-16-pnpm-7'
+          MAVEN_IMAGE = 'node:18-alpine'
         }
         steps {
           echo "start building~~~~~~~~~~~~~"
           script {
-            //  docker.image(MAVEN_IMAGE).inside() {
+             docker.image(MAVEN_IMAGE).inside() {
                 sh 'pnpm install'
                 sh 'pnpm run build'
                 sh 'ls -l dist'
-              // }
+              }
           }
         }
     }
