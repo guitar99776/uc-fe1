@@ -27,23 +27,23 @@ pipeline {
     }
     stage('pnpm build') {
         environment {
-          MAVEN_IMAGE = 'node:18-alpine'
+          BASIC_IMAGE = 'node:18-alpine'
         }
         steps {
           echo "start building~~~~~~~~~~~~~"
           script {
-             docker.image(MAVEN_IMAGE).inside() {
+            //  docker.image(BASIC_IMAGE).inside() {
                 sh 'pnpm install'
                 sh 'pnpm run build'
                 sh 'ls -l dist'
-              }
+              // }
           }
         }
     }
     stage('docker build') {
       steps {
           sh "ls -alh"
-          sh 'docker login $HARBOR_HOST -u $HARBOR_USER_NAME -p $HARBOR_PASSWORD'
+          // sh 'docker login $HARBOR_HOST -u $HARBOR_USER_NAME -p $HARBOR_PASSWORD'
           sh 'docker build -t test:lastest .'
           // sh 'docker build -t $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION .'
           // sh 'docker push $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
