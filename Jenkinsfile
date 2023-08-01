@@ -32,23 +32,21 @@ pipeline {
         steps {
           echo "start building~~~~~~~~~~~~~"
           script {
-            docker.image().inside() {
               sh 'pnpm install'
               sh 'pnpm run build'
               sh 'ls -l dist'
-            }
           }
         }
     }
-    // stage('docker build') {
-    //   steps {
-    //       sh "ls -alh"
-    //       sh 'docker login $HARBOR_HOST -u $HARBOR_USER_NAME -p $HARBOR_PASSWORD'
-    //       sh 'docker build -t $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION .'
-    //       sh 'docker push $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
-    //       sh 'docker rmi $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
-    //   }
-    // }
+    stage('docker build') {
+      steps {
+          sh "ls -alh"
+          sh 'docker login $HARBOR_HOST -u $HARBOR_USER_NAME -p $HARBOR_PASSWORD'
+          sh 'docker build -t $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION .'
+          sh 'docker push $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
+          sh 'docker rmi $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
+      }
+    }
 
     // stage('deploy k8s') {
     //     agent {
