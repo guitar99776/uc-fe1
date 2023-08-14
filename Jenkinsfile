@@ -17,9 +17,9 @@ pipeline {
       HARBOR_PATH ='ctg-hr'
       APP_NAME = 'uc-fe'
       APP_VERSION = 'latest'
-      TEST_SELECT
-      BUILDING_IMMEDIATELY
-      TEST_INPUT
+      // TEST_SELECT
+      // BUILDING_IMMEDIATELY
+      // TEST_INPUT
    }
 
   stages {
