@@ -17,12 +17,16 @@ pipeline {
       HARBOR_PATH ='ctg-hr'
       APP_NAME = 'uc-fe'
       APP_VERSION = 'latest'
+      TEST_SELECT
+      BUILDING_IMMEDIATELY
+      TEST_INPUT
    }
 
   stages {
     stage('check environment') {
         steps {
             sh 'docker --version'
+            sh 'echo $TEST_SELECT $BUILDING_IMMEDIATELY $TEST_INPUT'
         }
     }
     stage('pnpm build') {
