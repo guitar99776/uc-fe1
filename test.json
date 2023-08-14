@@ -1,6 +1,6 @@
 {
   "name":"test json文件",
-  "aaa":"$TEST_SELECT",
-  "bbb":"$BUILDING_IMMEDIATELY",
-  "ccc":"$TEST_INPUT"
+  "aaa":"@TEST_SELECT",
+  "bbb":"@BUILDING_IMMEDIATELY",
+  "ccc":"@TEST_INPUT"
 }
