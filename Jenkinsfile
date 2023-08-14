@@ -25,7 +25,7 @@ pipeline {
             sh 'docker --version'
             sh 'echo "jenkins 传入params："'
             sh 'echo $TEST_SELECT $BUILDING_IMMEDIATELY $TEST_INPUT'
-            sh "sh build.sh ${IMAGE_TAG}"
+            sh "sh replace.sh $TEST_SELECT $BUILDING_IMMEDIATELY $TEST_INPUT"
         }
     }
     stage('pnpm build') {
