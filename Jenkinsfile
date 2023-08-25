@@ -77,4 +77,13 @@ pipeline {
     // }
 
   }
+
+  post {
+    always {
+      echo 'always print'
+    }
+    success {
+      echo "成功啦，准备发送钉钉通知📢"
+    }
+  }
 }
