@@ -55,7 +55,7 @@ pipeline {
             //  docker.image(BASIC_IMAGE).inside() {
                 sh "docker images"
                 sh 'docker image ls BASIC_IMAGE ' // 显示基础镜像的大小
-                sh 'du -sh BASIC_IMAGE ' // 显示基础镜像的大小
+                // sh 'du -sh BASIC_IMAGE ' // 显示基础镜像的大小
                 sh 'pnpm install'
                 sh 'du -sh node_modules'  // 显示node_modules的大小
                 sh 'pnpm run build'
@@ -71,6 +71,7 @@ pipeline {
           // sh 'docker login $HARBOR_HOST -u $HARBOR_USER_NAME -p $HARBOR_PASSWORD'
           sh 'docker build -t test:lastest .'
           sh 'docker image ls test'
+          sh "docker images --format "{{.ID}}" | xargs docker inspect --format='{{range .GraphDriver.Data.MergedDir}}{{println .}}{{end}}'"  // 显示所有图层
           // sh 'docker build -t $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION .'
           // sh 'docker push $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
           // sh 'docker rmi $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
