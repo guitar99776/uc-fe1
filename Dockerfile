@@ -8,9 +8,9 @@
 # EXPOSE 80
 # ENTRYPOINT ["/bin/sh","/etc/nginx/init.sh"]
 
-# FROM hub.c.163.com/library/nginx:latest
+FROM hub.c.163.com/library/nginx:latest
 
-# COPY dist/ /usr/share/nginx/html/
+COPY dist/ /usr/share/nginx/html/
 
 # RUN ln -s /usr/share/nginx/html/kenizi /usr/share/nginx/html
 # COPY nginx/default.conf /etc/nginx/conf.d/default.conf
