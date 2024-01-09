@@ -72,7 +72,7 @@ pipeline {
           sh 'docker build -t test:lastest .'
           sh 'docker image ls test'
           // sh "docker image inspect test"
-          sh "docker images --format 1ef925a67c5d | xargs docker inspect --format='{{range .GraphDriver.Data.MergedDir}}{{println .}}{{end}}'"  // 显示所有图层
+          sh "docker image save test | tar -tf - | grep layer | awk '{print $NF}'"  // 显示所有图层
           // sh 'docker build -t $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION .'
           // sh 'docker push $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
           // sh 'docker rmi $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
