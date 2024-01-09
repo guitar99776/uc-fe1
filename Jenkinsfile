@@ -53,7 +53,9 @@ pipeline {
           echo "start building~~~~~~~~~~~~~"
           script {
             //  docker.image(BASIC_IMAGE).inside() {
+                sh "docker images"
                 sh 'docker image ls BASIC_IMAGE ' // 显示基础镜像的大小
+                sh 'du -sh BASIC_IMAGE ' // 显示基础镜像的大小
                 sh 'pnpm install'
                 sh 'du -sh node_modules'  // 显示node_modules的大小
                 sh 'pnpm run build'
