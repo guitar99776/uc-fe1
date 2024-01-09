@@ -91,7 +91,7 @@ export const request: RequestConfig = {
             return {
                 ...config,
                 headers,
-                url: `/api${config.url}`,
+                url: `http://58.254.35.98:33024/api${config.url}`,
             };
         },
     ],
