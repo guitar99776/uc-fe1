@@ -8,7 +8,7 @@
 # EXPOSE 80
 # ENTRYPOINT ["/bin/sh","/etc/nginx/init.sh"]
 
-FROM hub.c.163.com/library/nginx:latest
+# FROM hub.c.163.com/library/nginx:latest
 
 COPY dist/ /usr/share/nginx/html/
 
