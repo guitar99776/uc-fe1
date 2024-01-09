@@ -56,6 +56,7 @@ pipeline {
                 sh 'pnpm install'
                 sh 'pnpm run build'
                 sh 'ls -l dist'
+                sh 'du -sh dist' // 显示dist文件夹size
               // }
           }
         }
