@@ -69,9 +69,10 @@ pipeline {
       steps {
           sh "ls -alh"
           // sh 'docker login $HARBOR_HOST -u $HARBOR_USER_NAME -p $HARBOR_PASSWORD'
-          sh 'docker build -t test:lastest .'
+          sh 'docker build -t 10.10.11.154:4000/test:lastest .'
           sh 'docker image ls test'
-          sh 'docker history test:lastest' // 查看所有图层
+          sh 'docker history 10.10.11.154:4000/test:lastest' // 查看所有图层
+          sh 'docker push 10.10.11.154:4000/test:lastest'
           // sh 'docker build -t $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION .'
           // sh 'docker push $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
           // sh 'docker rmi $HARBOR_HOST/$HARBOR_PATH/$APP_NAME:$APP_VERSION'
